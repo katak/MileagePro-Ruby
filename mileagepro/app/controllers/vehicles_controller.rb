@@ -6,6 +6,14 @@ class VehiclesController < ApplicationController
   end
 
   def create
-  	render plain: params[:vehicle].inspect
+  	@vehcile = Vehicle.new(vehicle_params)
+
+  	@vehicle.save
+  	redirect_to @vehicle
   end
+
+  private
+  	def vehicle_params
+  		params.require(:vehicle).permit(:year, :make, :model)
+  	end
 end
